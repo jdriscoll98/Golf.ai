@@ -1,0 +1,50 @@
+.sidenav {
+    width: 13vw;
+    height: 90vh;
+    position: fixed;
+    z-index: 1;
+    left: 20px;
+    background: #eee;
+    overflow-x: hidden;
+    padding: 8px 0;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.title {
+    margin: auto;
+}
+
+.tools {
+    height: 200px;
+    margin-top: 20px;
+    padding: 0 10px 0 10px;
+}
+
+.tool {
+    display: inline-block;
+    margin: 0 10px 0 10px;
+}
+
+.tool:hover {
+    cursor: pointer;
+
+}
+
+.wall {
+    width: 25px;
+    height: 25px;
+    background-color: black;
+}
+
+.grass {
+    width: 25px;
+    height: 25px;
+    background-color: green;
+}
+
+.water {
+    width: 25px;
+    height: 25px;
+    background-color: blue;
+}

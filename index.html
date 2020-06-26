@@ -1,9 +1,39 @@
 <html>
-  <head>
-    <script src="https://cdn.jsdelivr.net/npm/p5@1.0.0/lib/p5.js"></script>
-    <script src="sketch.js"></script>
-    <script src="tile.js"></script>
-  </head>
 
-  <body></body>
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/p5@1.0.0/lib/p5.js"></script>
+  <script src="sketch.js"></script>
+  <script src="tile.js"></script>
+  <script src="game.js"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="sidenav">
+    <h1 class="title">Golf.ai</h1>
+    <hr />
+    <div class="level-name-input">
+      <label for="name">Level Name</label>
+      <input type="text" name="name" />
+    </div>
+    <div class="tools">
+      <div onClick="game.setTile(1)" class="tool">
+        <div class="wall">
+        </div>
+        Wall
+      </div>
+      <div onClick="game.setTile(0)" class="tool">
+        <div class="grass">
+        </div>
+        Grass
+      </div>
+      <div onClick="game.setTile(2)" class="tool">
+        <div class="water">
+        </div>
+        Water
+      </div>
+    </div>
+  </div>
+</body>
+
 </html>

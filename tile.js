@@ -1,15 +1,17 @@
-function Tile(x, y) {
+function Tile(x, y, type = 0) {
     this.x = x;
     this.y = y;
-    this.wall = false;
+    this.type = type;
     this.draw = function () {
-        if (this.wall) {
+        stroke(0);
+        if (this.type == 1) {
             fill(0);
-            stroke(255);
+        }
+        else if (this.type == 2) {
+            fill('blue');
         }
         else {
-            fill(255);
-            stroke(0);
+            fill('green');
         }
         rect(x * 40, y * 40, 40, 40);
     }

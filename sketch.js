@@ -1,28 +1,20 @@
-let tiles;
+let game;
 
 function setup() {
-    createCanvas(windowWidth * .9, windowHeight * .9);
-    tiles = [];
-    for (var x = 0; x < 40; x += 1) {
-        tiles[x] = [];
-        for (var y = 0; y < 20; y += 1) {
-            tiles[x][y] = new Tile(x, y);
-        }
-    }
-
+    let canvas = createCanvas(windowWidth * .85, .95 * windowHeight);
+    canvas.position(.15 * windowWidth, .025 * window);
+    game = new Game();
+    game.initialize();
 }
 
 function draw() {
-
-    for (var x = 0; x < 40; x += 1) {
-        for (var y = 0; y < 20; y += 1) {
-            tiles[x][y].draw();
+    game.draw();
+    if (mouseIsPressed) {
+        var x = Math.floor((mouseX - 5) / 40);
+        var y = Math.floor((mouseY - 10) / 40);
+        if (x >= 0 && y >= 0 && x < game.grid_length && y < game.grid_height) {
+            game.changeTile(x, y);
         }
     }
 }
 
-function mouseClicked() {
-    var x = Math.floor((mouseX - 5) / 40);
-    var y = Math.floor((mouseY - 10) / 40);
-    tiles[x][y].wall = !tiles[x][y].wall;
-}
