@@ -9,12 +9,23 @@ function setup() {
 
 function draw() {
     game.draw();
-    if (mouseIsPressed) {
-        var x = Math.floor((mouseX - 5) / 40);
-        var y = Math.floor((mouseY - 10) / 40);
-        if (x >= 0 && y >= 0 && x < game.grid_length && y < game.grid_height) {
-            game.changeTile(x, y);
+    if (game.active) {
+        game.ball.update();
+        if (mouseIsPressed && mouseButton == LEFT) {
+            var x = Math.floor((mouseX - 5) / 40);
+            var y = Math.floor((mouseY - 10) / 40);
+
         }
     }
+    else {
+        if (mouseIsPressed && mouseButton == LEFT) {
+            var x = Math.floor((mouseX - 5) / 40);
+            var y = Math.floor((mouseY - 10) / 40);
+            if (x >= 0 && y >= 0 && x < game.grid_length && y < game.grid_height) {
+                game.changeTile(x, y);
+            }
+        }
+    }
+
 }
 

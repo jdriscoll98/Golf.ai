@@ -3,7 +3,6 @@ function Tile(x, y, type = 0) {
     this.y = y;
     this.type = type;
     this.draw = function () {
-        stroke(0);
         if (this.type == 1) {
             fill(0);
         }
@@ -14,5 +13,18 @@ function Tile(x, y, type = 0) {
             fill('green');
         }
         rect(x * 40, y * 40, 40, 40);
+        if (this.type == 3) {
+            fill(0);
+            circle(x * 40 + 20, y * 40 + 20, 30)
+        }
+        if (this.type == 4) {
+            if (game.active) {
+                return;
+            }
+            else {
+                fill(255);
+                circle(x * 40 + 20, y * 40 + 20, 30)
+            }
+        }
     }
 }
