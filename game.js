@@ -22,18 +22,19 @@ function Game() {
         this.tiles[this.grid_length - 2][this.grid_height - 2].type = 3;
     }
     this.draw = function () {
-        // if (game.active) {
-        //     noStroke();
-        // }
-        // else {
-        //     stroke(0);
-        // }
+        if (game.active) {
+            noStroke();
+        }
+        else {
+            stroke(0);
+        }
         for (var x = 0; x < this.grid_length; x += 1) {
             for (var y = 0; y < this.grid_height; y += 1) {
                 this.tiles[x][y].draw();
             }
         }
         if (game.active) {
+            stroke(0);
             fill(255);
             game.ball.draw();
         }

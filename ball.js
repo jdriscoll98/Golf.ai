@@ -1,8 +1,9 @@
 function Ball(tile) {
     this.x = tile.x * 40 + 20;
     this.y = tile.y * 40 + 20;
-    this.velocity = [1, 1];
-    this.friction = .0005;
+    this.load_velocity = [0, 0];
+    this.velocity = [0, 0];
+    this.friction = .001;
     this.update = function () {
         this.x += this.velocity[0] * deltaTime;
         this.y += this.velocity[1] * deltaTime;
@@ -32,7 +33,7 @@ function Ball(tile) {
         currentX = Math.floor((this.x - 20) / 40);
 
         currentX_Left = Math.floor((this.x - 20) / 40);
-        currentX_Right = Math.floor((this.x + 10) / 40);
+        currentX_Right = Math.floor((this.x) / 40);
         currentY_Top = Math.floor((this.y - 20) / 40);
         currentY_Bottom = Math.floor((this.y + 20) / 40);
 
