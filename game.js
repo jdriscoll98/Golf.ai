@@ -4,6 +4,7 @@ function Game() {
     this.currentTile = 1;
     this.tiles = [];
     this.active = false;
+    this.won = false;
     this.initialize = function () {
         for (var x = 0; x < this.grid_length; x += 1) {
             this.tiles[x] = [];
@@ -72,6 +73,7 @@ function Game() {
         }
     }
     this.reset = function () {
+        game.ball.reset(game.start);
         return;
     }
     this.edit = function () {

@@ -11,7 +11,14 @@ function draw() {
     game.draw();
     if (game.active) {
         game.ball.update();
-        if (mouseIsPressed && mouseButton == LEFT) {
+        if ((mouseIsPressed && mouseButton == LEFT) || game.ball.loading) {
+            if ((Math.abs((mouseX - game.ball.x) < 20 && Math.abs(mouseY - game.ball.y) < 20)) || game.ball.loading) {
+                game.ball.loading = true;
+            }
+            else {
+                game.ball.loading = false;
+                return;
+            }
             var x = Math.floor((mouseX - 5) / 40);
             var y = Math.floor((mouseY - 10) / 40);
             line(mouseX, mouseY, game.ball.x, game.ball.y);
@@ -46,9 +53,12 @@ function draw() {
 }
 
 function mouseReleased() {
-    if (game.active && game.ball.velocity[0] == 0 && game.ball.velocity[1] == 0) {
+    if (game.active && game.ball.velocity[0] == 0 && game.ball.velocity[1] == 0 && game.ball.loading) {
         game.ball.velocity[0] = game.ball.load_velocity[0];
         game.ball.velocity[1] = game.ball.load_velocity[1];
+        game.ball.loading = false;
+        game.ball.stroke_count += 1;
+        game.ball.path_distance = 0;
     }
 }
 
