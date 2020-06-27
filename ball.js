@@ -1,4 +1,4 @@
-function Ball(tile) {
+function Ball(tile = game.start) {
     this.x = tile.x * 40 + 20;
     this.y = tile.y * 40 + 20;
     this.load_velocity = [0, 0];
@@ -7,6 +7,7 @@ function Ball(tile) {
     this.loading = false;
     this.stroke_count = 0;
     this.path_distance = 0;
+    this.display = true;
     this.update = function () {
         this.x += this.velocity[0] * deltaTime;
         this.y += this.velocity[1] * deltaTime;
@@ -46,7 +47,11 @@ function Ball(tile) {
     this.checkForCollision = function () {
         currentY = Math.floor((this.y) / 40);
         currentX = Math.floor((this.x) / 40);
-
+        // ball out of bounds, handle error better at some point
+        if (!(currentX > 0 && currentY > 0 && currentX < game.grid_length && currentY < game.grid_height)) {
+            delete this;
+            return;
+        }
         // check if you made it in the hole
         if (game.tiles[currentX][currentY] == game.hole) {
             text("YOU WIN!", width / 2, height / 2);
@@ -101,7 +106,6 @@ function Ball(tile) {
         X = Math.floor((this.x) / 40);
         Y = Math.floor((this.y) / 40);
         let path = findShortestPath([X, Y], game.tiles);
-        console.log(path);
         this.path_distance = path.length;
 
         // clear visited tiles array;
@@ -112,9 +116,12 @@ function Ball(tile) {
         }
     }
     this.draw = function () {
-        circle(this.x, this.y, 30);
-        text(this.stroke_count, this.x, this.y);
-        text(this.path_distance, this.x, this.y + 20);
+        if (this.display) {
+            circle(this.x, this.y, 30);
+            text(this.stroke_count, this.x, this.y);
+            text(this.path_distance, this.x, this.y + 20);
+        }
+
     }
     this.reset = function (tile) {
         this.x = tile.x * 40 + 20;
@@ -123,6 +130,9 @@ function Ball(tile) {
         this.velocity = [0, 0];
         this.loading = false;
         this.stroke_count = 0;
+    }
+    this.isStopped = function () {
+        return (this.velocity[0] == 0 && this.velocity[1] == 0);
     }
 }
 

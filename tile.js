@@ -18,7 +18,7 @@ function Tile(x, y, type = 0) {
             circle(x * 40 + 20, y * 40 + 20, 30)
         }
         if (this.type == 4) {
-            if (game.mode === 1) {
+            if (game.mode !== 0) {
                 return;
             }
             else {

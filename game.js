@@ -39,6 +39,13 @@ function Game() {
             fill(255);
             game.ball.draw();
         }
+        if (game.mode === 2) {
+            stroke(0);
+            fill(255);
+            for (ball in game.population) {
+                game.population[ball].draw();
+            }
+        }
     }
     this.setTile = function (tile) {
         this.currentTile = tile;
@@ -71,11 +78,23 @@ function Game() {
     }
     this.train = function (players, generations, display) {
         if (this.isValidGame()) {
-            console.log(players, generations, display);
+            game.population = [];
+            game.best_path = [];
+            for (var p = 0; p < players; p++) {
+                game.population[p] = new Ball(game.start);
+                game.population[p].load_velocity = [generateRandomInteger(-1, 1), generateRandomInteger(-1, 1)];
+                game.population[p].velocity = [generateRandomInteger(-1, 1), generateRandomInteger(-1, 1)];
+                this.mode = 2;
+            }
         }
     }
     this.reset = function () {
-        game.ball.reset(game.start);
+        if (game.ball) {
+            game.ball.reset(game.start);
+        }
+        else {
+            game.mode = 0;
+        }
         return;
     }
     this.edit = function () {
@@ -102,4 +121,7 @@ function Game() {
         }
         return true;
     }
+}
+function generateRandomInteger(min, max) {
+    return min + Math.random() * (max + 1 - min);
 }

@@ -9,9 +9,10 @@ function setup() {
 
 function draw() {
     game.draw();
+    // Playing
     if (game.mode === 1) {
         game.ball.update();
-        if ((mouseIsPressed && mouseButton == LEFT) || game.ball.loading) {
+        if ((mouseIsPressed && mouseButton == LEFT && game.ball.velocity[0] == 0 && game.ball.velocity[1] == 0) || game.ball.loading) {
             if ((Math.abs((mouseX - game.ball.x) < 20 && Math.abs(mouseY - game.ball.y) < 20)) || game.ball.loading) {
                 game.ball.loading = true;
             }
@@ -40,6 +41,44 @@ function draw() {
 
             }
         }
+    }
+    else if (game.mode == 2) {
+        for (ball in game.population) {
+            game.population[ball].update();
+        }
+        // if (game.won) {
+        //     game.reset();
+        // }
+        let next_population = true;
+        for (ball in game.population) {
+            if (!(game.population[ball].isStopped())) {
+                next_population = false;
+                break;
+            }
+        }
+        if (next_population) {
+            let best_ball;
+            let closest_distance = 999999999;
+            for (ball in game.population) {
+                game.population[ball].display = false;
+                if (game.population[ball].path_distance < closest_distance) {
+                    best_ball = game.population[ball];
+                    closest_distance = best_ball.path_distance;
+                }
+            }
+            best_ball.display = true;
+            tileX = Math.floor((best_ball.x) / 40);
+            tileY = Math.floor((best_ball.y) / 40);
+            game.best_path.push(best_ball.load_velocity)
+            console.log(game.best_path);
+            // let pop_size = game.population.length;
+            // for (var p = 0; p < pop_size; p++) {
+            //     game.population[p] = new Ball({ x: tileX, y: tileY });
+            //     game.population[p].load_velocity = [generateRandomInteger(-1, 1), generateRandomInteger(-1, 1)];
+            //     game.population[p].velocity = [generateRandomInteger(-1, 1), generateRandomInteger(-1, 1)];
+            // }
+        }
+
     }
     else {
         if (mouseIsPressed && mouseButton == LEFT) {
