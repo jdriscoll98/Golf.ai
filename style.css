@@ -97,3 +97,27 @@
     font-weight: 900;
     font-size: 18px;
 }
+
+.train {
+    margin: 10px 0 0 0;
+    background-color: blue;
+    color: white;
+    width: 150px;
+    font-weight: 900;
+    font-size: 18px;
+}
+
+.settings {
+    width: 100%;
+    margin: 15px 0 0 0;
+}
+
+
+
+.slider {
+    width: 80%;
+    margin: 0 0 0 20px;
+    /* Full-width */
+    height: 25px;
+    /* Specified height */
+}

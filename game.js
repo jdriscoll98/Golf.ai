@@ -64,9 +64,27 @@ function Game() {
         }
     }
     this.activate = function () {
+        if (this.isValidGame()) {
+            game.ball = new Ball(game.start);
+            this.mode = 1;
+        }
+    }
+    this.train = function (players, generations, display) {
+        if (this.isValidGame()) {
+            console.log(players, generations, display);
+        }
+    }
+    this.reset = function () {
+        game.ball.reset(game.start);
+        return;
+    }
+    this.edit = function () {
+        this.mode = 0;
+    }
+    this.isValidGame = function () {
         if (!(game.start && game.hole)) {
             alert("You must choose a starting spot and hole");
-            return;
+            return false;
         }
         if (!(findShortestPath([game.start.x, game.start.y], game.tiles))) {
             alert("No valid path to hole");
@@ -75,16 +93,13 @@ function Game() {
                     game.tiles[i][j].visited = false;
                 }
             }
-            return;
+            return false;
         }
-        game.ball = new Ball(game.start);
-        this.mode = 1;
-    }
-    this.reset = function () {
-        game.ball.reset(game.start);
-        return;
-    }
-    this.edit = function () {
-        this.mode = 0;
+        for (var i = 0; i < game.grid_length; i += 1) {
+            for (var j = 0; j < game.grid_height; j += 1) {
+                game.tiles[i][j].visited = false;
+            }
+        }
+        return true;
     }
 }
