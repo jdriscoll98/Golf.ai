@@ -9,7 +9,7 @@ function setup() {
 
 function draw() {
     game.draw();
-    if (game.active) {
+    if (game.mode === 1) {
         game.ball.update();
         if ((mouseIsPressed && mouseButton == LEFT) || game.ball.loading) {
             if ((Math.abs((mouseX - game.ball.x) < 20 && Math.abs(mouseY - game.ball.y) < 20)) || game.ball.loading) {
@@ -53,7 +53,7 @@ function draw() {
 }
 
 function mouseReleased() {
-    if (game.active && game.ball.velocity[0] == 0 && game.ball.velocity[1] == 0 && game.ball.loading) {
+    if (game.mode === 1 && game.ball.velocity[0] == 0 && game.ball.velocity[1] == 0 && game.ball.loading) {
         game.ball.velocity[0] = game.ball.load_velocity[0];
         game.ball.velocity[1] = game.ball.load_velocity[1];
         game.ball.loading = false;

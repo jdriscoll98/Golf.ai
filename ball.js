@@ -14,7 +14,6 @@ function Ball(tile) {
         if (this.velocity[0] == 0 && this.velocity[1] == 0) {
             if (this.path_distance == 0) {
                 this.calculatePathDistance();
-                console.log(this.path_distance);
             }
         }
         if (this.velocity[0] < 0) {
@@ -115,6 +114,7 @@ function Ball(tile) {
     this.draw = function () {
         circle(this.x, this.y, 30);
         text(this.stroke_count, this.x, this.y);
+        text(this.path_distance, this.x, this.y + 20);
     }
     this.reset = function (tile) {
         this.x = tile.x * 40 + 20;
