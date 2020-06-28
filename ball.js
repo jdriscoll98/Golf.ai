@@ -49,7 +49,9 @@ function Ball(tile = game.start) {
         currentX = Math.floor((this.x) / 40);
         // ball out of bounds, handle error better at some point
         if (!(currentX > 0 && currentY > 0 && currentX < game.grid_length && currentY < game.grid_height)) {
-            delete this;
+            this.path_distance = 999999;
+            this.velocity = [0, 0];
+            this.display = false;
             return;
         }
         // check if you made it in the hole
@@ -118,6 +120,7 @@ function Ball(tile = game.start) {
     this.draw = function () {
         if (this.display) {
             circle(this.x, this.y, 30);
+            text(this.path_distance, this.x, this.y);
         }
 
     }

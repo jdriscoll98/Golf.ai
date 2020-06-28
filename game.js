@@ -70,7 +70,6 @@ function Game() {
         else {
             this.mode = new Edit();
         }
-        return;
     }
     this.edit = function () {
         this.mode = new Edit();
