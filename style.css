@@ -70,6 +70,12 @@
 }
 
 
+.play:hover,
+.edit:hover,
+.reset:hover,
+.train:hover {
+    cursor: pointer;
+}
 
 .play {
     margin: 10px 0 0 0;
