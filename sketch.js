@@ -8,7 +8,7 @@ function setup() {
 }
 
 function draw() {
-    game.mode.update();
     game.mode.draw();
+    game.mode.update();
 }
 

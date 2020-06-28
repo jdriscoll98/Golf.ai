@@ -2,6 +2,11 @@ function Play(params) {
     this.name = "play";
     this.update = function () {
         game.ball.update();
+        if (game.won) {
+            alert("You win!");
+            game.won = false;
+            game.ball.reset(game.start);
+        }
         this.handleInput();
     }
     this.handleInput = function () {

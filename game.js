@@ -51,15 +51,13 @@ function Game() {
             this.mode = new Play();
         }
     }
-    this.train = function (players, populations, display) {
+    this.train = function (players, populations) {
         if (this.isValidGame()) {
-            console.log(players, populations, display);
             let train = new Train({
                 'players': players,
                 'populations': populations,
-                'display': display,
             });
-            train.enter(game.start);
+            train.setup_populations(game.start);
             this.mode = train;
         }
     }
@@ -72,6 +70,7 @@ function Game() {
         }
     }
     this.edit = function () {
+        this.best_path = [];
         this.mode = new Edit();
     }
     this.isValidGame = function () {

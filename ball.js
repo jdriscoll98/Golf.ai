@@ -56,8 +56,7 @@ function Ball(tile = game.start) {
         }
         // check if you made it in the hole
         if (game.tiles[currentX][currentY] == game.hole) {
-            text("YOU WIN!", width / 2, height / 2);
-            this.velocity = [0, 0];
+            game.winning_ball_velocity = this.load_velocity;
             game.won = true;
         }
 
@@ -131,6 +130,7 @@ function Ball(tile = game.start) {
         this.velocity = [0, 0];
         this.loading = false;
         this.stroke_count = 0;
+        this.path_distance = 0;
     }
     this.isStopped = function () {
         return (this.velocity[0] == 0 && this.velocity[1] == 0);

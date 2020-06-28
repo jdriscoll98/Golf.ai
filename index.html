@@ -9,6 +9,7 @@
   <script src="states/edit.js"></script>
   <script src="states/train.js"></script>
   <script src="states/play.js"></script>
+  <script src="states/replay.js"></script>
   <link rel="stylesheet" href="style.css">
 </head>
 
@@ -71,17 +72,10 @@
           oninput="genOutput.value = genInput.value"> <br />
         <output name="genOutput" id="genOutput">1</output>
       </div>
-      <br /><br />
-      <label for="display">Display Type (How many AI to watch)
-      </label>
-      <select name="display" id="display">
-        <option value="all">All</option>
-        <option value="best">Best</option>
-        <option value="none">None</option>
-      </select>
+      <br />
     </div>
     <div class="button">
-      <button onClick="game.train(playersOutput.value, genOutput.value, display.value)" class="train">Train</button>
+      <button onClick="game.train(playersInput.value, genInput.value)" class="train">Train</button>
     </div>
   </div>
 </body>

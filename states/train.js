@@ -2,12 +2,13 @@ function Train(params) {
     this.name = "train";
     this.players = params.players;
     this.populations = params.populations;
-    this.display = params.display;
     this.currentPopulation = 0;
-    this.foundBestBall = false;
-    this.enter = function (start) {
+    this.best_path = [];
+    this.population_best_paths = [];
+    this.setup_populations = function (start) {
+        this.currentPopulation = 0;
+        this.last_start = start;
         game.populations = [];
-        game.best_path = [];
         for (var i = 0; i < this.populations; i++) {
             game.populations[i] = [];
             for (var p = 0; p < this.players; p++) {
@@ -18,15 +19,48 @@ function Train(params) {
         }
     }
     this.update = function () {
+        if (game.won) {
+            this.best_path.push(game.winning_ball_velocity);
+            console.log("BEST", this.best_path);
+            game.ball = new Ball(game.start);
+            game.ball.velocity = this.best_path[0];
+            game.won = false;
+            game.mode = new Replay(this.best_path);
+        }
         var all_stopped = true;
         for (var p = 0; p < this.players; p++) {
             game.populations[this.currentPopulation][p].update();
-            if (!(game.populations[this.currentPopulation][p].isStopped()) || !(game.populations[this.currentPopulation][p].path_distance !== 0)) {
+            if (!(game.populations[this.currentPopulation][p].isStopped()) || game.populations[this.currentPopulation][p].path_distance === 0) {
                 all_stopped = false;
             };
         }
-        if (all_stopped && !this.foundBestBall) {
-            this.set_best_ball();
+        if (all_stopped) {
+            var best_ball = this.set_best_ball();
+            // store best shot from this population
+            this.population_best_paths.push({
+                'distance': best_ball.path_distance,
+                'path': best_ball.load_velocity
+            });
+            this.currentPopulation += 1;
+            // take best shot from all populations and move to next shot;
+            if (this.currentPopulation >= this.populations) {
+                var min_distance = 999999;
+                var best_shot;
+                for (var path = 0; path < this.population_best_paths.length; path++) {
+                    if (this.population_best_paths[path].distance < min_distance) {
+                        best_shot = this.population_best_paths[path].path
+                        min_distance = this.population_best_paths[path].distance;
+                    }
+                }
+                this.best_path.push(best_shot);
+                var new_start_x = Math.floor(best_ball.x / 40);
+                var new_start_y = Math.floor(best_ball.y / 40);
+                this.setup_populations({
+                    'x': new_start_x,
+                    'y': new_start_y
+                });
+            }
+
         }
     }
     this.set_best_ball = function () {
@@ -42,7 +76,7 @@ function Train(params) {
             }
         }
         best_ball.display = true;
-        this.foundBestBall = true;
+        return best_ball;
     }
     this.draw = function () {
         for (var x = 0; x < game.grid_length; x += 1) {
@@ -58,3 +92,4 @@ function Train(params) {
         noStroke();
     }
 }
+
