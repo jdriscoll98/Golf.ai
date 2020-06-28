@@ -5,6 +5,7 @@ function Train(params) {
     this.display = params.display;
     this.currentPopulation = 0;
     this.enter = function (start) {
+        this.currentPopulation = 0;
         game.populations = [];
         game.best_path = [];
         for (var i = 0; i < this.populations; i++) {
@@ -17,9 +18,27 @@ function Train(params) {
         }
     }
     this.update = function () {
+        var all_stopped = true;
         for (var p = 0; p < this.players; p++) {
             game.populations[this.currentPopulation][p].update();
+            var all_stopped = game.populations[this.currentPopulation][p].isStopped();
         }
+        if (all_stopped) {
+            this.set_best_ball();
+        }
+    }
+    this.set_best_ball = function () {
+        let best_ball;
+        let closest_distance = 999999;
+        for (var p = 0; p < this.players; p++) {
+            let ball = game.populations[this.currentPopulation][p];
+            ball.display = false;
+            if (ball.path_distance < closest_distance) {
+                best_ball = ball;
+                closest_distance = best_ball.path_distance;
+            }
+        }
+        best_ball.display = true;
     }
     this.draw = function () {
         for (var x = 0; x < game.grid_length; x += 1) {
@@ -33,6 +52,5 @@ function Train(params) {
             game.populations[this.currentPopulation][p].draw();
         }
         noStroke();
-
     }
 }

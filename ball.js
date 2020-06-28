@@ -118,8 +118,6 @@ function Ball(tile = game.start) {
     this.draw = function () {
         if (this.display) {
             circle(this.x, this.y, 30);
-            text(this.stroke_count, this.x, this.y);
-            text(this.path_distance, this.x, this.y + 20);
         }
 
     }

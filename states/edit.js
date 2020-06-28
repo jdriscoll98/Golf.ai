@@ -2,7 +2,6 @@ function Edit() {
     this.name = "edit";
     this.update = function () {
         if (mouseIsPressed && mouseButton == LEFT) {
-            console.log('here');
             var x = Math.floor((mouseX - 5) / 40);
             var y = Math.floor((mouseY - 10) / 40);
             if (x >= 0 && y >= 0 && x < game.grid_length && y < game.grid_height) {
