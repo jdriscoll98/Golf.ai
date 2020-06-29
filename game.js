@@ -55,11 +55,12 @@ function Game() {
             this.mode = new Play();
         }
     }
-    this.train = function (players, populations) {
+    this.train = function (players, populations, variation) {
         if (this.isValidGame()) {
             let train = new Train({
                 'players': players,
                 'populations': populations,
+                'variation': variation,
             });
             var starting_spot = {
                 'x': game.start.x * 40 + 20,

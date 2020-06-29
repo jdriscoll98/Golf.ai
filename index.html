@@ -73,9 +73,16 @@
         <output name="genOutput" id="genOutput">1</output>
       </div>
       <br />
+      <label class="label" for="players">Population Variation</label>
+      <div class="slider">
+        <input type="range" min="10" max="50" value="1" class="slider" id="varInput"
+          oninput="varOutput.value = varInput.value"> <br />
+        <output name="varOutput" id="varOutput">10</output><span>%</span>
+      </div>
+      <br />
     </div>
     <div class="button">
-      <button onClick="game.train(playersInput.value, genInput.value)" class="train">Train</button>
+      <button onClick="game.train(playersInput.value, genInput.value, varInput.value)" class="train">Train</button>
     </div>
   </div>
 </body>

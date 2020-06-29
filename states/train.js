@@ -2,6 +2,7 @@ function Train(params) {
     this.name = "train";
     this.players = params.players;
     this.populations = params.populations;
+    this.variation = params.variation / 100;
     this.currentPopulation = 0;
     this.best_path = [];
     this.population_best_paths = [];
@@ -81,8 +82,8 @@ function Train(params) {
                     }
                 }
                 for (var p = 0; p < this.players; p++) {
-                    var velocity_x = generateRandomInteger(best_shot_x * .9, best_shot_x * 1.1);
-                    var velocity_y = generateRandomInteger(best_shot_y * .9, best_shot_y * 1.1);
+                    var velocity_x = generateRandomInteger(best_shot_x * (1 - this.variation), best_shot_x * (1 + this.variation));
+                    var velocity_y = generateRandomInteger(best_shot_y * (1 - this.variation), best_shot_y * (1 + this.variation));
                     game.populations[this.currentPopulation][p].load_velocity[0] = velocity_x;
                     game.populations[this.currentPopulation][p].load_velocity[1] = velocity_y;
                     game.populations[this.currentPopulation][p].velocity[0] = velocity_x;
