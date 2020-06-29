@@ -10,8 +10,8 @@ function Replay(path) {
                 this.current_shot = 0;
                 game.ball.reset(game.start);
             }
-            // console.log(this.current_shot, this.path[this.current_shot]);
-            game.ball.velocity = this.path[this.current_shot];
+            game.ball.velocity[0] = this.path[this.current_shot][0];
+            game.ball.velocity[1] = this.path[this.current_shot][1];
         }
     }
     this.draw = function () {

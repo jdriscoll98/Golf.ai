@@ -96,5 +96,5 @@ function Game() {
     }
 }
 function generateRandomInteger(min, max) {
-    return min + Math.random() * (max + 1 - min);
+    return min + Math.random() * (max - min);
 }

@@ -13,19 +13,21 @@ function Train(params) {
             game.populations[i] = [];
             for (var p = 0; p < this.players; p++) {
                 game.populations[i][p] = new Ball(start);
-                game.populations[i][p].load_velocity = [generateRandomInteger(-.75, .75), generateRandomInteger(-.75, .75)];
-                game.populations[i][p].velocity = [generateRandomInteger(-.75, .75), generateRandomInteger(-.75, .75)];
+                var velocity_x = generateRandomInteger(-.75, .75);
+                var velocity_y = generateRandomInteger(-.75, .75);
+                game.populations[i][p].load_velocity = [velocity_x, velocity_y];
+                game.populations[i][p].velocity = [velocity_x, velocity_y];
             }
         }
     }
     this.update = function () {
         if (game.won) {
-            this.best_path.push(game.winning_ball_velocity);
-            console.log("BEST", this.best_path);
+            this.best_path.push(game.winning_ball_velocity.slice(0));
             game.ball = new Ball(game.start);
-            game.ball.velocity = this.best_path[0];
+            game.ball.velocity[0] = this.best_path[0][0];
+            game.ball.velocity[1] = this.best_path[0][1];
             game.won = false;
-            game.mode = new Replay(this.best_path);
+            game.mode = new Replay(this.best_path.slice(0));
         }
         var all_stopped = true;
         for (var p = 0; p < this.players; p++) {
@@ -39,20 +41,22 @@ function Train(params) {
             // store best shot from this population
             this.population_best_paths.push({
                 'distance': best_ball.path_distance,
-                'path': best_ball.load_velocity
+                'path_x': best_ball.load_velocity[0],
+                'path_y': best_ball.load_velocity[1]
             });
             this.currentPopulation += 1;
             // take best shot from all populations and move to next shot;
             if (this.currentPopulation >= this.populations) {
                 var min_distance = 999999;
-                var best_shot;
-                for (var path = 0; path < this.population_best_paths.length; path++) {
-                    if (this.population_best_paths[path].distance < min_distance) {
-                        best_shot = this.population_best_paths[path].path
-                        min_distance = this.population_best_paths[path].distance;
+                var best_shot_x, best_shot_y;
+                for (var i = 0; i < this.population_best_paths.length; i++) {
+                    if (this.population_best_paths[i].distance < min_distance) {
+                        best_shot_x = this.population_best_paths[i].path_x;
+                        best_shot_y = this.population_best_paths[i].path_y;
+                        min_distance = this.population_best_paths[i].distance;
                     }
                 }
-                this.best_path.push(best_shot);
+                this.best_path.push([best_shot_x, best_shot_y]);
                 var new_start_x = Math.floor(best_ball.x / 40);
                 var new_start_y = Math.floor(best_ball.y / 40);
                 this.setup_populations({
@@ -69,7 +73,9 @@ function Train(params) {
         var closest_distance = 999999;
         for (var p = 0; p < this.players; p++) {
             current_ball = game.populations[this.currentPopulation][p];
+            // hide all balls
             current_ball.display = false;
+            // 
             if (current_ball.path_distance < closest_distance) {
                 closest_distance = current_ball.path_distance;
                 best_ball = current_ball;
@@ -90,6 +96,7 @@ function Train(params) {
             game.populations[this.currentPopulation][p].draw();
         }
         noStroke();
+
     }
 }
 
