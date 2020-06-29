@@ -4,11 +4,11 @@ function Train(params) {
     this.populations = params.populations;
     this.variation = params.variation / 100;
     this.currentPopulation = 0;
+    this.currentShot = 1;
     this.best_path = [];
     this.population_best_paths = [];
     this.setup_populations = function (start) {
         this.currentPopulation = 0;
-        this.last_start = start;
         game.populations = [];
         for (var i = 0; i < this.populations; i++) {
             game.populations[i] = [];
@@ -56,6 +56,7 @@ function Train(params) {
             this.currentPopulation += 1;
             // take best shot from all populations and move to next shot;
             if (this.currentPopulation >= this.populations) {
+                this.currentShot++;
                 var min_distance = 999999;
                 var best_shot_x, best_shot_y;
                 for (var i = 0; i < this.population_best_paths.length; i++) {
@@ -123,7 +124,9 @@ function Train(params) {
             game.populations[this.currentPopulation][p].draw();
         }
         noStroke();
-
+        text("Shot Number: " + this.currentShot, 80, 70);
+        var displayPop = this.currentPopulation + 1
+        text("Population: " + displayPop, 80, 80);
     }
 }
 

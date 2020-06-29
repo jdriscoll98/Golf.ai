@@ -10,7 +10,6 @@ function Replay(path) {
             game.won = false;
             return;
         }
-        game.ball.update();
 
         if (game.ball.isStopped()) {
             this.current_shot++;
@@ -21,6 +20,7 @@ function Replay(path) {
             game.ball.velocity[0] = this.path[this.current_shot][0];
             game.ball.velocity[1] = this.path[this.current_shot][1];
         }
+        game.ball.update();
     }
     this.draw = function () {
         noStroke();
