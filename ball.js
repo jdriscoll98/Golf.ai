@@ -1,6 +1,6 @@
-function Ball(tile = game.start) {
-    this.x = tile.x * 40 + 20;
-    this.y = tile.y * 40 + 20;
+function Ball(start) {
+    this.x = start.x
+    this.y = start.y
     this.load_velocity = [0, 0];
     this.velocity = [0, 0];
     this.friction = .0009;
@@ -119,8 +119,6 @@ function Ball(tile = game.start) {
     this.draw = function () {
         if (this.display) {
             circle(this.x, this.y, 30);
-            text(this.load_velocity[0], this.x - 7.5, this.y);
-            text(this.load_velocity[1], this.x, this.y + 7.5);
         }
 
     }

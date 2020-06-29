@@ -23,11 +23,16 @@ function Train(params) {
     this.update = function () {
         if (game.won) {
             this.best_path.push(game.winning_ball_velocity.slice(0));
-            game.ball = new Ball(game.start);
+            var starting_spot = {
+                'x': game.start.x * 40 + 20,
+                'y': game.start.y * 40 + 20,
+            }
+            game.ball = new Ball(starting_spot);
             game.ball.velocity[0] = this.best_path[0][0];
             game.ball.velocity[1] = this.best_path[0][1];
-            game.won = false;
             game.mode = new Replay(this.best_path.slice(0));
+            game.won = false;
+            return;
         }
         var all_stopped = true;
         for (var p = 0; p < this.players; p++) {
@@ -57,11 +62,9 @@ function Train(params) {
                     }
                 }
                 this.best_path.push([best_shot_x, best_shot_y]);
-                var new_start_x = Math.floor(best_ball.x / 40);
-                var new_start_y = Math.floor(best_ball.y / 40);
                 this.setup_populations({
-                    'x': new_start_x,
-                    'y': new_start_y
+                    'x': best_ball.x,
+                    'y': best_ball.y
                 });
             }
 

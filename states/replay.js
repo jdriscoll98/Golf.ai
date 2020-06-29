@@ -2,6 +2,14 @@ function Replay(path) {
     this.path = path;
     this.current_shot = 0;
     this.update = function () {
+        if (game.won) {
+            this.current_shot = 0;
+            game.ball.reset(game.start);
+            game.ball.velocity[0] = this.path[this.current_shot][0];
+            game.ball.velocity[1] = this.path[this.current_shot][1];
+            game.won = false;
+            return;
+        }
         game.ball.update();
 
         if (game.ball.isStopped()) {

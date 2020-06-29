@@ -47,7 +47,11 @@ function Game() {
     }
     this.activate = function () {
         if (this.isValidGame()) {
-            this.ball = new Ball(this.start);
+            var starting_spot = {
+                'x': this.start.x * 40 + 20,
+                'y': this.start.y * 40 + 20,
+            }
+            this.ball = new Ball(starting_spot);
             this.mode = new Play();
         }
     }
@@ -57,7 +61,11 @@ function Game() {
                 'players': players,
                 'populations': populations,
             });
-            train.setup_populations(game.start);
+            var starting_spot = {
+                'x': game.start.x * 40 + 20,
+                'y': game.start.y * 40 + 20,
+            }
+            train.setup_populations(starting_spot);
             this.mode = train;
         }
     }
