@@ -17,10 +17,10 @@ function Game() {
                 }
             }
         }
-        this.start = this.tiles[1][1];
-        this.hole = this.tiles[this.grid_length - 2][this.grid_height - 2];
-        this.tiles[1][1].type = 4;
-        this.tiles[this.grid_length - 2][this.grid_height - 2].type = 3;
+        this.start = this.tiles[Math.floor(this.grid_length / 4)][Math.floor(this.grid_height / 2)];
+        this.hole = this.tiles[Math.floor(3 * this.grid_length / 4)][Math.floor(this.grid_height / 2)];
+        this.tiles[Math.floor(this.grid_length / 4)][Math.floor(this.grid_height / 2)].type = 4;
+        this.tiles[Math.floor(3 * this.grid_length / 4)][Math.floor(this.grid_height / 2)].type = 3;
     }
     this.setTile = function (tile) {
         this.currentTile = tile;
