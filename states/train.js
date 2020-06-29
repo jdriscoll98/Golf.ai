@@ -31,6 +31,7 @@ function Train(params) {
                 'x': game.start.x * 40 + 20,
                 'y': game.start.y * 40 + 20,
             }
+            console.log("STARTING", starting_spot.x, starting_spot.y);
             game.ball = new Ball(starting_spot);
             game.ball.velocity[0] = this.best_path[0][0];
             game.ball.velocity[1] = this.best_path[0][1];

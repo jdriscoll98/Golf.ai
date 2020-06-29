@@ -105,5 +105,5 @@ function Game() {
     }
 }
 function generateRandomInteger(min, max) {
-    return min + Math.random() * (max - min);
+    return (min + Math.random() * (max - min)).toPrecision(5);
 }
