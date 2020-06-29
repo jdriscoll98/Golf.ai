@@ -13,11 +13,14 @@ function Train(params) {
             game.populations[i] = [];
             for (var p = 0; p < this.players; p++) {
                 game.populations[i][p] = new Ball(start);
-                var velocity_x = generateRandomInteger(-.75, .75);
-                var velocity_y = generateRandomInteger(-.75, .75);
-                game.populations[i][p].load_velocity = [velocity_x, velocity_y];
-                game.populations[i][p].velocity = [velocity_x, velocity_y];
+
             }
+        }
+        for (var p = 0; p < this.players; p++) {
+            var velocity_x = generateRandomInteger(-.75, .75);
+            var velocity_y = generateRandomInteger(-.75, .75);
+            game.populations[0][p].load_velocity = [velocity_x, velocity_y];
+            game.populations[0][p].velocity = [velocity_x, velocity_y];
         }
     }
     this.update = function () {
@@ -67,6 +70,26 @@ function Train(params) {
                     'y': best_ball.y
                 });
             }
+            else {
+                var min_distance = 999999;
+                var best_shot_x, best_shot_y;
+                for (var i = 0; i < this.population_best_paths.length; i++) {
+                    if (this.population_best_paths[i].distance < min_distance) {
+                        best_shot_x = this.population_best_paths[i].path_x;
+                        best_shot_y = this.population_best_paths[i].path_y;
+                        min_distance = this.population_best_paths[i].distance;
+                    }
+                }
+                for (var p = 0; p < this.players; p++) {
+                    var velocity_x = generateRandomInteger(best_shot_x * .9, best_shot_x * 1.1);
+                    var velocity_y = generateRandomInteger(best_shot_y * .9, best_shot_y * 1.1);
+                    game.populations[this.currentPopulation][p].load_velocity[0] = velocity_x;
+                    game.populations[this.currentPopulation][p].load_velocity[1] = velocity_y;
+                    game.populations[this.currentPopulation][p].velocity[0] = velocity_x;
+                    game.populations[this.currentPopulation][p].velocity[1] = velocity_y;
+                }
+            }
+
 
         }
     }
