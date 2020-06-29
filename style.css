@@ -2,7 +2,7 @@ html,
 body {
     margin: 0;
     height: 100%;
-    overflow: hidden
+    overflow: hidden;
 }
 
 .sidenav {
@@ -16,6 +16,7 @@ body {
     padding: 8px 0;
     border-radius: 5px;
     text-align: center;
+    font-size: .75rem;
 }
 
 .title {
