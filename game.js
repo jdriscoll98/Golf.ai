@@ -24,6 +24,15 @@ function Game() {
     }
     this.setTile = function (tile) {
         this.currentTile = tile;
+        var tile_map = {
+            0: "Grass",
+            1: "Wall",
+            2: "Water",
+            3: "Hole",
+            4: "Start",
+            5: "Sand",
+        }
+        document.getElementById("currentTile").innerHTML = tile_map[this.currentTile];
     }
     this.changeTile = function (x, y) {
         if (this.currentTile == 3 || this.currentTile == 4) {
@@ -44,6 +53,7 @@ function Game() {
         if (!(x == 0 || y == 0 || x == this.grid_length - 1 || y == this.grid_height - 1)) {
             this.tiles[x][y].type = this.currentTile;
         }
+
     }
     this.activate = function () {
         if (this.isValidGame()) {
