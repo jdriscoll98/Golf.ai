@@ -27,7 +27,7 @@ function Train(params) {
     this.update = function () {
         if (game.won) {
             console.log("Final Ball Velocity: ", game.winning_ball.velocity[0], game.winning_ball.velocity[1]);
-            this.best_path.push([game.winning_ball.velocity[0], game.winning_ball.velocity[1], game.winning_ball.x, game.winning_ball.y]);
+            this.best_path.push([game.winning_ball.load_velocity[0], game.winning_ball.load_velocity[1], game.winning_ball.x, game.winning_ball.y]);
             var starting_spot = {
                 'x': game.start.x * 40 + 20,
                 'y': game.start.y * 40 + 20,
