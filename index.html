@@ -17,10 +17,6 @@
   <div class="sidenav">
     <h1 class="title">golf.ai</h1>
     <hr />
-    <div class="level-name-input">
-      <label for="name">Level Name</label>
-      <input type="text" name="name" />
-    </div>
     <div class="tiles">
       <div onClick="game.setTile(1)" class="tile">
         <div class="wall">
@@ -64,33 +60,33 @@
       <div class="button">
         <button onClick="game.edit()" class="edit">Edit</button>
       </div>
-    </div>
-    <div class="settings">
-      <label for="players">Number of AI</label>
-      <div class="slider">
-        <input type="range" min="50" max="200" value="50" class="slider" id="playersInput"
-          oninput="playersOutput.value = playersInput.value">
-        <output name="playersOutput" id="playersOutput">50</output>
-      </div><br />
-      <label class="label" for="players">Number of Populations</label>
-      <div class="slider">
-        <input type="range" min="1" max="20" value="1" class="slider" id="genInput"
-          oninput="genOutput.value = genInput.value"> <br />
-        <output name="genOutput" id="genOutput">1</output>
+      </>
+      <div class="settings">
+        <label for="players">Number of AI</label>
+        <div class="slider">
+          <input type="range" min="50" max="200" value="50" class="slider" id="playersInput"
+            oninput="playersOutput.value = playersInput.value">
+          <output name="playersOutput" id="playersOutput">50</output>
+        </div><br />
+        <label class="label" for="players">Number of Populations</label>
+        <div class="slider">
+          <input type="range" min="1" max="20" value="1" class="slider" id="genInput"
+            oninput="genOutput.value = genInput.value"> <br />
+          <output name="genOutput" id="genOutput">1</output>
+        </div>
+        <br />
+        <label class="label" for="players">Population Variation</label>
+        <div class="slider">
+          <input type="range" min="10" max="50" value="1" class="slider" id="varInput"
+            oninput="varOutput.value = varInput.value"> <br />
+          <output name="varOutput" id="varOutput">10</output><span>%</span>
+        </div>
+        <br />
       </div>
-      <br />
-      <label class="label" for="players">Population Variation</label>
-      <div class="slider">
-        <input type="range" min="10" max="50" value="1" class="slider" id="varInput"
-          oninput="varOutput.value = varInput.value"> <br />
-        <output name="varOutput" id="varOutput">10</output><span>%</span>
+      <div class="button">
+        <button onClick="game.train(playersInput.value, genInput.value, varInput.value)" class="train">Train</button>
       </div>
-      <br />
     </div>
-    <div class="button">
-      <button onClick="game.train(playersInput.value, genInput.value, varInput.value)" class="train">Train</button>
-    </div>
-  </div>
 </body>
 
 </html>

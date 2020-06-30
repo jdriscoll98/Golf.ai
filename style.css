@@ -91,40 +91,34 @@ body {
     cursor: pointer;
 }
 
+
+.edit,
+.train,
+.reset,
 .play {
-    margin: 10px 0 0 0;
-    background-color: green;
-    color: white;
-    width: 150px;
-    font-weight: 900;
-    font-size: 18px;
-}
-
-.reset {
-    margin: 10px 0 0 0;
-    background-color: red;
-    color: white;
-    width: 150px;
-    font-weight: 900;
-    font-size: 18px;
-}
-
-.edit {
     margin: 10px 0 0 0;
     background-color: orange;
     color: white;
-    width: 150px;
+    width: 80%;
+    height: 12%;
     font-weight: 900;
-    font-size: 18px;
+    font-size: 1rem;
+}
+
+.play {
+    background-color: green;
+    color: white;
+
+}
+
+.reset {
+    background-color: red;
+    color: white;
+
 }
 
 .train {
-    margin: 10px 0 0 0;
     background-color: blue;
-    color: white;
-    width: 150px;
-    font-weight: 900;
-    font-size: 18px;
 }
 
 .settings {
@@ -136,8 +130,11 @@ body {
 
 .slider {
     width: 80%;
-    margin: 0 0 0 20px;
-    /* Full-width */
+    margin: auto;
     height: 25px;
-    /* Specified height */
+}
+
+.label {
+    width: 100%;
+    white-space: nowrap;
 }
