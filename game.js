@@ -1,6 +1,6 @@
 function Game() {
-    this.grid_length = Math.floor(windowWidth * .85 / 40);
-    this.grid_height = Math.floor(windowHeight * .95 / 40);
+    this.grid_length = Math.floor(width / GRID_SIZE);
+    this.grid_height = Math.floor(height / GRID_SIZE);
     this.currentTile = 1;
     this.tiles = [];
     this.mode = new Edit();
@@ -24,33 +24,27 @@ function Game() {
     }
     this.setTile = function (tile) {
         this.currentTile = tile;
-        var tile_map = {
-            0: "Grass",
-            1: "Wall",
-            2: "Water",
-            3: "Hole",
-            4: "Start",
-            5: "Sand",
-        }
-        document.getElementById("currentTile").innerText = tile_map[this.currentTile];
+        document.getElementById("currentTile").innerText = TILE_MAP[this.currentTile];
     }
     this.changeTile = function (x, y) {
-        if (this.currentTile == 3 || this.currentTile == 4) {
-            for (var i = 0; i < this.grid_length; i += 1) {
-                for (var j = 0; j < this.grid_height; j += 1) {
-                    if (this.tiles[i][j].type == this.currentTile) {
-                        this.tiles[i][j].type = 0;
+        if (!(x == 0 || y == 0 || x == this.grid_length - 1 || y == this.grid_height - 1)) {
+            // Clear out previous starting / hole spot
+            if (this.currentTile == 3 || this.currentTile == 4) {
+                for (var i = 0; i < this.grid_length; i += 1) {
+                    for (var j = 0; j < this.grid_height; j += 1) {
+                        if (this.tiles[i][j].type == this.currentTile) {
+                            this.tiles[i][j].type = 0;
+                        }
                     }
                 }
+                if (this.currentTile == 3) {
+                    this.hole = this.tiles[x][y];
+                }
+                else {
+                    this.start = this.tiles[x][y];
+                }
             }
-        }
-        if (this.currentTile == 3) {
-            this.hole = this.tiles[x][y];
-        }
-        else if (this.currentTile == 4) {
-            this.start = this.tiles[x][y];
-        }
-        if (!(x == 0 || y == 0 || x == this.grid_length - 1 || y == this.grid_height - 1)) {
+
             this.tiles[x][y].type = this.currentTile;
         }
 
@@ -99,21 +93,21 @@ function Game() {
         }
         if (!(findShortestPath([this.start.x, this.start.y], this.tiles))) {
             alert("No valid path to hole");
-            for (var i = 0; i < this.grid_length; i += 1) {
-                for (var j = 0; j < this.grid_height; j += 1) {
-                    this.tiles[i][j].visited = false;
-                }
-            }
+            this.clearPath();
             return false;
         }
+        this.clearPath();
+        return true;
+    }
+    this.clearPath = function () {
         for (var i = 0; i < this.grid_length; i += 1) {
             for (var j = 0; j < this.grid_height; j += 1) {
                 this.tiles[i][j].visited = false;
             }
         }
-        return true;
     }
 }
 function generateRandomInteger(min, max) {
     return (min + Math.random() * (max - min))
 }
+

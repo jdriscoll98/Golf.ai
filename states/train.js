@@ -84,7 +84,9 @@ function Train(params) {
                 }
                 for (var p = 0; p < this.players; p++) {
                     var velocity_x = generateRandomInteger(best_shot_x * (1 - this.variation), best_shot_x * (1 + this.variation));
+
                     var velocity_y = generateRandomInteger(best_shot_y * (1 - this.variation), best_shot_y * (1 + this.variation));
+
                     game.populations[this.currentPopulation][p].load_velocity[0] = velocity_x;
                     game.populations[this.currentPopulation][p].load_velocity[1] = velocity_y;
                     game.populations[this.currentPopulation][p].velocity[0] = velocity_x;
@@ -101,15 +103,13 @@ function Train(params) {
         var closest_distance = 999999;
         for (var p = 0; p < this.players; p++) {
             current_ball = game.populations[this.currentPopulation][p];
-            // hide all balls
-            current_ball.display = false;
-            // 
+            current_ball.isBestBall = false;
             if (current_ball.path_distance < closest_distance) {
                 closest_distance = current_ball.path_distance;
                 best_ball = current_ball;
             }
         }
-        best_ball.display = true;
+        best_ball.isBestBall = true;
         return best_ball;
     }
     this.draw = function () {
@@ -124,9 +124,11 @@ function Train(params) {
             game.populations[this.currentPopulation][p].draw();
         }
         noStroke();
+        textStyle(BOLD);
         text("Shot Number: " + this.currentShot, 80, 70);
         var displayPop = this.currentPopulation + 1
         text("Population: " + displayPop, 80, 80);
+        textStyle(NORMAL);
     }
 }
 

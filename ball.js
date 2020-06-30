@@ -8,6 +8,7 @@ function Ball(start) {
     this.stroke_count = 0;
     this.path_distance = 0;
     this.display = true;
+    this.isBestBall = false;
     this.update = function () {
         this.x += this.velocity[0] * deltaTime;
         this.y += this.velocity[1] * deltaTime;
@@ -50,6 +51,7 @@ function Ball(start) {
         // ball out of bounds, handle error better at some point
         if (!(currentX > 0 && currentY > 0 && currentX < game.grid_length && currentY < game.grid_height)) {
             this.path_distance = 999999;
+            this.velocity = [0, 0];
             this.velocity = [0, 0];
             this.display = false;
             return;
@@ -128,10 +130,11 @@ function Ball(start) {
     }
     this.draw = function () {
         if (this.display) {
+            fill("white");
             circle(this.x, this.y, 30);
         }
-
     }
+
     this.reset = function (tile) {
         this.x = tile.x * 40 + 20;
         this.y = tile.y * 40 + 20;
