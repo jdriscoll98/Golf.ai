@@ -32,7 +32,7 @@ function Game() {
             4: "Start",
             5: "Sand",
         }
-        document.getElementById("currentTile").innerHTML = tile_map[this.currentTile];
+        document.getElementById("currentTile").innerText = tile_map[this.currentTile];
     }
     this.changeTile = function (x, y) {
         if (this.currentTile == 3 || this.currentTile == 4) {
