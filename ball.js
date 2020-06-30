@@ -79,22 +79,6 @@ function Ball(start) {
         currentY_Top = Math.floor((this.y - 20) / 40);
         currentY_Bottom = Math.floor((this.y + 20) / 40);
 
-
-        // Bottom
-        if (game.tiles[currentX][currentY_Bottom].type == 1) {
-            this.velocity[1] = -this.velocity[1];
-            this.y -= 5;
-
-            return;
-        }
-        // Top
-        if (game.tiles[currentX][currentY_Top].type == 1) {
-            this.velocity[1] = -this.velocity[1];
-            this.y += 5;
-            // this.velocity = [0, 0];
-
-            return;
-        }
         // right
         if (game.tiles[currentX_Right][currentY].type == 1) {
             this.velocity[0] = -this.velocity[0];
@@ -111,6 +95,23 @@ function Ball(start) {
 
             return;
         }
+        // Bottom
+        if (game.tiles[currentX][currentY_Bottom].type == 1) {
+            this.velocity[1] = -this.velocity[1];
+            this.y -= 5;
+
+            return;
+        }
+        // Top
+        if (game.tiles[currentX][currentY_Top].type == 1) {
+            this.velocity[1] = -this.velocity[1];
+            this.y += 5;
+            // this.velocity = [0, 0];
+
+            return;
+        }
+
+
     }
     this.calculatePathDistance = function () {
         X = Math.floor((this.x) / 40);
