@@ -26,17 +26,14 @@ function Train(params) {
     }
     this.update = function () {
         if (game.won) {
-            console.log("Final Ball Velocity: ", game.winning_ball.velocity[0], game.winning_ball.velocity[1]);
             this.best_path.push([game.winning_ball.load_velocity[0], game.winning_ball.load_velocity[1], game.winning_ball.x, game.winning_ball.y]);
             var starting_spot = {
                 'x': game.start.x * 40 + 20,
                 'y': game.start.y * 40 + 20,
             }
-            console.log("STARTING", starting_spot.x, starting_spot.y);
             game.ball = new Ball(starting_spot);
             game.ball.velocity[0] = this.best_path[0][0];
             game.ball.velocity[1] = this.best_path[0][1];
-            console.log("STARTING REPLAY VELOCITY", game.ball.velocity[0], game.ball.velocity[1]);
             game.mode = new Replay(this.best_path.slice(0));
             game.won = false;
             return;
@@ -69,8 +66,6 @@ function Train(params) {
                     }
                 }
                 this.best_path.push([best_shot_x, best_shot_y, best_ball.x, best_ball.y]);
-                console.log("Population Best Ball Location: ", this.currentShot, best_ball.x, best_ball.y);
-                console.log("Population Best Ball Velocity: ", this.currentShot, best_shot_x, best_shot_y);
                 this.currentShot++;
                 this.setup_populations({
                     'x': best_ball.x,

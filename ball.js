@@ -134,7 +134,6 @@ function Ball(start) {
     this.reset = function (tile) {
         this.x = tile.x * 40 + 20;
         this.y = tile.y * 40 + 20;
-        console.log("RESET", this.x, this.y);
         this.load_velocity = [0, 0];
         this.velocity = [0, 0];
         this.loading = false;
