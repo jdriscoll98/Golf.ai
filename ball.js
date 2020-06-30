@@ -56,12 +56,21 @@ function Ball(start) {
         }
         // check if you made it in the hole
         if (game.tiles[currentX][currentY] == game.hole) {
-            game.winning_ball_velocity = this.load_velocity;
+            game.winning_ball = this;
             game.won = true;
         }
 
+        // water
         if (game.tiles[currentX][currentY].type == 2) {
             this.reset(game.start);
+        }
+
+        // sand
+        if (game.tiles[currentX][currentY].type == 5) {
+            this.friction = .0027;
+        }
+        else {
+            this.friction = .0009;
         }
 
 
@@ -190,7 +199,7 @@ var locationStatus = function (location, grid) {
         return 'Invalid';
     } else if (grid[dfl][dft].type == 3) {
         return 'Goal';
-    } else if (grid[dfl][dft].type !== 0 || grid[dfl][dft].visited) {
+    } else if ((grid[dfl][dft].type !== 0 && grid[dfl][dft].type !== 5) || grid[dfl][dft].visited) {
         // location is either an obstacle or has been visited
         return 'Blocked';
     } else {

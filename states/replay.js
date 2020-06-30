@@ -12,11 +12,20 @@ function Replay(path) {
         }
 
         if (game.ball.isStopped()) {
+
             this.current_shot++;
             if (this.current_shot >= this.path.length) {
                 this.current_shot = 0;
                 game.ball.reset(game.start);
+                game.ball.velocity[0] = this.path[this.current_shot][0];
+                game.ball.velocity[1] = this.path[this.current_shot][1];
             }
+            else {
+                game.ball.x = this.path[this.current_shot - 1][2];
+                game.ball.y = this.path[this.current_shot - 1][3];
+            }
+            console.log("REPLAY LOCATION", this.current_shot, game.ball.x, game.ball.y);
+            console.log("REPLAY VELOCITY", this.current_shot + 1, this.path[this.current_shot][0], this.path[this.current_shot][1]);
             game.ball.velocity[0] = this.path[this.current_shot][0];
             game.ball.velocity[1] = this.path[this.current_shot][1];
         }

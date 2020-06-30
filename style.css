@@ -57,6 +57,12 @@ body {
     background-color: blue;
 }
 
+.sand {
+    width: 25px;
+    height: 25px;
+    background-color: sandybrown;
+}
+
 .hole {
     background: black;
     border-radius: 100%;

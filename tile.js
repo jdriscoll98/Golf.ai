@@ -9,9 +9,13 @@ function Tile(x, y, type = 0) {
         else if (this.type == 2) {
             fill('blue');
         }
+        else if (this.type == 5) {
+            fill('sandybrown');
+        }
         else {
             fill('green');
         }
+
         rect(x * 40, y * 40, 40, 40);
         if (this.type == 3) {
             fill(0);
